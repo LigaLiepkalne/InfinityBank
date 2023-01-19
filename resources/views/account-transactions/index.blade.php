@@ -1,5 +1,4 @@
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
@@ -38,17 +37,18 @@
 
     <x-app-layout>
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-        <!-- MDB -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
-
         <x-slot name="header">
 
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Transaction history
             </h2>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+            <!-- Google Fonts -->
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+            <!-- MDB -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
+
+
 
             <form method="GET" action="{{ route('transactions.index') }}">
                 <!-- Select account-->
@@ -63,14 +63,15 @@
                         @endforeach
                     </select>
                 </div>
+
                 <!-- Date inputs-->
                 <div class="form-group">
                     <x-label for="start-date">Start Date</x-label>
-                    <x-input type="date" name="start-date" id="start-date" class="form-control"/>
+                    <x-input type="date" name="start-date" id="start-date" class="form-control datepicker" min="{{ date('Y-m-d', strtotime('-1 year')) }}" max="{{ date('Y-m-d', strtotime('+1 day')) }}"/>
                 </div>
                 <div class="form-group">
                     <x-label for="end-date">End Date</x-label>
-                    <x-input type="date" name="end-date" id="end-date" class="form-control"/>
+                    <x-input type="date" name="end-date" id="end-date" class="form-control datepicker" min="{{ date('Y-m-d', strtotime('-1 year')) }}" max="{{ date('Y-m-d', strtotime('+1 day')) }}"/>
                 </div>
 
                 <h6 class="font-semibold text-xl text-gray-800 leading-tight">Search by</h6>

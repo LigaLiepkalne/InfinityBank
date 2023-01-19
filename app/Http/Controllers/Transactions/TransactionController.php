@@ -26,11 +26,38 @@ class TransactionController extends Controller
                     ->orWhere('sender_account', $request->get('account'));
             });
         }
-
+/*
         if ($request->get('sender') || $request->get('recipient')) {
             $transactions = $transactions->where(function($query) use ($request) {
                 $query->where('sender_name', $request->get('sender'))
                     ->orWhere('recipient_name', $request->get('recipient'));
+            });
+        }
+*/
+
+        if ($request->get('sender') || $request->get('recipient')) {
+            $transactions = $transactions->where(function($query) use ($request) {
+                $sender = $request->get('sender');
+                $recipient = $request->get('recipient');
+
+                if(!empty($sender)) {
+                    $name = explode(" ", $sender);
+                    $query->where(function($q) use ($name) {
+                        $q->where('sender_name', $name[0]);
+                        if(count($name) > 1) {
+                            $q->orWhere('sender_surname', $name[1]);
+                        }
+                    });
+                }
+                if(!empty($recipient)) {
+                    $name = explode(" ", $recipient);
+                    $query->orWhere(function($q) use ($name) {
+                        $q->where('recipient_name', $name[0]);
+                        if(count($name) > 1) {
+                            $q->orWhere('recipient_surname', $name[1]);
+                        }
+                    });
+                }
             });
         }
 

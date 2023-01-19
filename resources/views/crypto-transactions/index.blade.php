@@ -72,15 +72,15 @@
                         <!-- Date inputs-->
                         <div class="form-group">
                             <x-label for="start-date">Start Date</x-label>
-                            <x-input data-format="dd/MM/yyyy" type="date" name="start-date" id="start-date" class="form-control"/>
+                            <x-input type="date" name="start-date" id="start-date" class="form-control datepicker" min="{{ date('Y-m-d', strtotime('-1 year')) }}" max="{{ date('Y-m-d', strtotime('+1 day')) }}"/>
                         </div>
                         <div class="form-group">
                             <x-label for="end-date">End Date</x-label>
-                            <x-input type="date" name="end-date" id="end-date" class="form-control"/>
+                            <x-input type="date" name="end-date" id="end-date" class="form-control datepicker" min="{{ date('Y-m-d', strtotime('-1 year')) }}" max="{{ date('Y-m-d', strtotime('+1 day')) }}"/>
                         </div>
-
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </form>
+
                 </div>
             </div>
         </div>

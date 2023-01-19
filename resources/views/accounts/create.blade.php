@@ -53,22 +53,8 @@
                 Label
             </x-label>
 
-            <x-input id="label" class="block mt-1 w-full" type="text" name="label" :value="old('label')" required autofocus />
+            <x-input id="label" class="block mt-1 w-full" type="text" name="label" :value="old('label')" autofocus />
         </div>
-
-        <div class="form-group  mt-4">
-            <!-- Type -->
-            <x-label for="type">
-                Account Type
-            </x-label>
-
-            <select name="type" id="type" style="width: 235px" required class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6">
-                <option value="checking">Checking</option>
-                <option value="savings">Savings</option>
-            </select>
-        </div>
-
-
 
         <div class="form-group mt-4" style="display: flex; flex-direction: row; align-items: center;">
 
@@ -80,7 +66,7 @@
 
             <div class="form-group">
             <!-- Currency -->
-            <select id="currency" style="width: 90px" required class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" name="currency" required>
+            <select id="currency" style="width: 95px" required class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" name="currency" required>
                 @foreach($currencies as $currency)
                     <option value="{{ $currency }}">{{ $currency }}</option>
                 @endforeach

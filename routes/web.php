@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Accounts\AccountOperationsController;
 use App\Http\Controllers\Accounts\CloseAccountController;
 use App\Http\Controllers\Accounts\OpenAccountController;
@@ -24,12 +25,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('deposit-withdraw', [AccountOperationsController::class, 'deposit']);
-Route::get('deposit-withdraw', [AccountOperationsController::class, 'showDepositWithdrawForm'])->name('deposit-withdraw');
+//Route::post('deposit-withdraw', [AccountOperationsController::class, 'deposit']);
+//Route::get('deposit-withdraw', [AccountOperationsController::class, 'showDepositWithdrawForm'])->name('deposit-withdraw');
 
-Route::get('/dashboard', [AccountOperationsController::class, 'showDashboard'])->middleware(['auth'])->name('dashboard');
+//Route::get('/dashboard', [AccountOperationsController::class, 'showDashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [AccountController::class, 'index'])->middleware(['auth'])->name('dashboard');
+//Route::get('accounts/{id}', [AccountOperationsController::class, 'showAccount'])->middleware(['auth'])->name('show');
+Route::get('accounts/{id}', [AccountController::class, 'show'])->middleware(['auth'])->name('show');
 
-Route::get('accounts/{id}', [AccountOperationsController::class, 'showAccount'])->middleware(['auth'])->name('show');
 Route::put('accounts/{id}/edit', [AccountOperationsController::class, 'updateLabel'])->middleware(['auth'])->name('update');
 Route::delete('accounts/{id}/delete', [CloseAccountController::class, 'deleteAccount'])->middleware(['auth'])->name('delete');
 //route for showing crupto portfolio

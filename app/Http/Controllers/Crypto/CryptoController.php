@@ -86,8 +86,9 @@ class CryptoController extends Controller
         $codeIndex = rand(1, count($codes));
         $currencies = ['USD', 'EUR', 'JPY', 'GBP', 'CHF', 'AUD', 'CAD', 'HKD', 'SGD', 'KRW', 'CNY', 'INR', 'TWD', 'THB', 'BRL', 'MXN', 'RUB', 'ZAR', 'SEK', 'IDR'];
 
-            $query = $request->input('query');
-            $crypto = $this->cryptoCurrencyService->getSingleCrypto( $query);
+            $query = strtoupper($request->input('query'));
+
+            $crypto = $this->cryptoCurrencyService->getSingleCrypto($query);
 
         $metadata = $this->cryptoCurrencyService->getCryptoMetadata($query);
 
