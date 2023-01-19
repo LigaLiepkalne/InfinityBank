@@ -9,38 +9,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 
-class CurrencyApiRepository
+class CurrencyApiRepository implements CurrencyRepository
 {
     public function __construct()
     {
         $this->apiKey = env('CURRENCY_EXCHANGE_RATE_API_KEY');
     }
-/*
-    public function getExchangeRates(): Collection
-    {
-        $client = new Client();
-        $response = $client->get('https://api.currencyapi.com/v3/latest', [
-            'query' => [
-                'base_currency' => 'EUR',
-                'currencies' => 'USD,EUR,JPY,GBP,CHF,AUD,CAD,HKD,SGD,KRW,CNY,INR,TWD,THB,BRL,MXN,RUB,ZAR,SEK,IDR',
-            ],
-            'headers' => [
-                'apikey' => $this->apiKey
-            ],
-        ]);
-        $responseBody = $response->getBody();
-
-        $data = json_decode($responseBody, true);
-
-        $exchangeRates = collect();
-        Carbon::parse($data['meta']['last_updated_at']);
-
-        foreach ($data['data'] as $currency => $rate) {
-            $exchangeRates->push(new CurrencyExchangeRate($currency, $rate['value'], $data['meta']['last_updated_at']));
-        }
-        return $exchangeRates;
-    }
-*/
 
     public function getExchangeRates(): Collection
     {
@@ -61,10 +35,8 @@ class CurrencyApiRepository
             $responseBody = $response->getBody();
 
             $data = json_decode($responseBody, true);
-            // Store the data in cache for 1 hour
-            Cache::put('exchangeRates', $data, 100);
-           // Cache::put($search, $response, now()->addMinutes(60));
 
+            Cache::put('exchangeRates', $data, 100);
         }
 
         $exchangeRates = collect();
@@ -79,10 +51,7 @@ class CurrencyApiRepository
 
     public function getExchangeRate($currency): float
     {
-        // Try to get the data from cache
-        $data = Cache::get('exchangeRate' . $currency);
-        // If the data isn't in cache, fetch it from the API
-        if (!$data) {
+        return Cache::remember('exchangeRate' . $currency, 60, function () use ($currency) {
             $client = new Client();
             $response = $client->get('https://api.currencyapi.com/v3/latest', [
                 'query' => [
@@ -96,42 +65,8 @@ class CurrencyApiRepository
             $responseBody = $response->getBody();
 
             $data = json_decode($responseBody, true);
-            // Store the data in cache for 1 hour
-            Cache::put('exchangeRate' . $currency, $data, 100);
-        }
-        return $data['data'][$currency]['value'];
-    }
-
-
-
-
-
-/*
-    public function getExchangeRate($currency): float
-    {
-        $client = new Client();
-        $response = $client->get('https://api.currencyapi.com/v3/latest', [
-            'query' => [
-                'base_currency' => 'EUR',
-                'currencies' => $currency,
-            ],
-            'headers' => [
-                'apikey' => $this->apiKey
-            ],
-        ]);
-        $responseBody = $response->getBody();
-
-        $data = json_decode($responseBody, true);
-/*
-        //return data using cache
-        Cache::remember('exchangeRate' . $currency, 3600, function () use ($data)
-        {
-            return $data;
+            return $data['data'][$currency]['value'];
         });
-
-        return $data['data'][$currency]['value'];
     }
-
-*/
 
 }

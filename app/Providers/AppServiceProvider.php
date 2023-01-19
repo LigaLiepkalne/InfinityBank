@@ -2,14 +2,17 @@
 
 namespace App\Providers;
 
-use App\Models\Account;
+use App\Composers\CodeCardComposer;
 use App\Repositories\Crypto\CoinMarketCapCryptoRepository;
 use App\Repositories\Crypto\CryptoRepository;
-use App\Services\AccountOperationsService;
+use App\Repositories\CurrencyApiRepository;
+use App\Repositories\CurrencyRepository;
 use App\Services\Crypto\BuyCryptoService;
 use App\Services\Crypto\CryptoPortfolioService;
 use App\Services\Crypto\CryptoService;
 use App\Services\Crypto\SellCryptoService;
+use App\Services\CurrencyExchangeRate\CurrencyApiService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -42,6 +45,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(SellCryptoService::class, function ($app) {
             return new SellCryptoService($app->make(CryptoRepository::class));
         });
+
+
+        $this->app->bind(CurrencyRepository::class, CurrencyApiRepository::class);
+        $this->app->singleton(CurrencyApiService::class, function ($app) {
+            return new CurrencyApiService($app->make(CurrencyRepository::class));
+        });
+
+
     }
 
     /**
@@ -51,6 +62,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer(
+            '*', CodeCardComposer::class
+        );
     }
 }

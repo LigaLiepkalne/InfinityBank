@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Accounts;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\CodeCard;
-use App\Models\CryptoPortfolio;
 use App\Models\Transaction;
 use App\Services\Crypto\CryptoPortfolioService;
-use App\Services\Crypto\CryptoService;
 use DateTime;
 use Illuminate\View\View;
 
