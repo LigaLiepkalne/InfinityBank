@@ -77,6 +77,7 @@ class CryptoController extends Controller
 */
     public function show(Request $request): View
     {
+
         $userBankAccounts = Account::where('user_id', auth()->id())->get();
 
         $codeCard = CodeCard::where('user_id', auth()->id())->first();
@@ -88,17 +89,24 @@ class CryptoController extends Controller
             $query = $request->input('query');
             $crypto = $this->cryptoCurrencyService->getSingleCrypto( $query);
 
+        $metadata = $this->cryptoCurrencyService->getCryptoMetadata($query);
+
         return view('crypto.show', [
             'crypto' => $crypto,
             'userBankAccounts' => $userBankAccounts,
             'codeIndex' => $codeIndex,
             'codes' => $codes,
             'currencies' => $currencies ,
+            'metadata' => $metadata,
         ]);
     }
 
     public function showByCurrency(Request $request, string $symbol): View
     {
+
+        $metadata = $this->cryptoCurrencyService->getCryptoMetadata($symbol);
+
+
         $currencies = ['USD', 'EUR', 'JPY', 'GBP', 'CHF', 'AUD', 'CAD', 'HKD', 'SGD', 'KRW', 'CNY', 'INR', 'TWD', 'THB', 'BRL', 'MXN', 'RUB', 'ZAR', 'SEK', 'IDR'];
         $currency = $request->get('currency');
         $crypto = $this->cryptoCurrencyService->getSingleCrypto($symbol, $currency);
@@ -116,6 +124,7 @@ class CryptoController extends Controller
             'codes' => $codes,
             'crypto' => $crypto,
             'currencies' => $currencies,
+            'metadata' => $metadata,
         ]);
         //return view('crypto.show', ['crypto' => $crypto]);
     }

@@ -46,6 +46,12 @@
          display: flex;
          align-items: center;
      }
+
+    .form-inline{
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
 </style>
 
 @include('userSettings.code-card')
@@ -54,20 +60,25 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Trade
         </h2>
+
+        <form method="GET" action="/trade/{{ $crypto->getSymbol() }}/show" id="formId" style="display: flex; align-items: center; margin-top: 20px" class="form-inline">
+            <select name="currency" style="min-width: 100px;"
+                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" name="currency">
+                @foreach($currencies as $currency)
+                    <option value="{{ $currency }}" {{ $currency === 'EUR' ? 'selected' : '' }}>{{ $currency }}</option>
+                @endforeach
+            </select>
+            <button type="submit" style="margin-left: 5px; margin-top:5px; "><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16" color="#cddade">
+                    <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </button>
+        </form>
+
     </x-slot>
 
-    <form method="GET" action="/trade/{{ $crypto->getSymbol() }}/show" id="formId" style="display: flex; align-items: center; margin-top: 20px">
-        <select name="currency" style="min-width: 100px; " required class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" name="currency" >
-            @foreach($currencies as $currency)
-                <option value="{{ $currency }}">{{ $currency }}</option>
-            @endforeach
-        </select>
-        <button type="submit" style="margin-left: 5px; margin-top:5px;"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16" color="#cddade">
-                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-            </svg></button>
-
-    </form>
-
+    @foreach($metadata as $data)
+        <li>{{ $data }}</li>
+    @endforeach
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
         <div class="p-6 bg-white border-b border-gray-200">

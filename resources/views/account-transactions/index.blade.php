@@ -54,7 +54,9 @@
                 <!-- Select account-->
                 <div class="form-group">
                     <x-label for="account">Account</x-label>
-                    <select style="color: #2563eb; display: inline-block; margin-left:25px; margin-right: 10px;" name="account" id="account" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" required autofocus>
+                    <select style="color: #2563eb; display: inline-block; margin-left:25px; margin-right: 10px;"
+                            name="account" id="account"
+                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" required autofocus>
                         <option selected>Select your account number</option>
                         @foreach ($userBankAccounts as $index => $account)
                             <option value="{{ $account->number }}">{{ $account->number }}</option>

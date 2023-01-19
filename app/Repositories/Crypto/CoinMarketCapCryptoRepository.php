@@ -93,6 +93,56 @@ class CoinMarketCapCryptoRepository implements CryptoRepository
         return $fmt->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
     }
 
+    public function getCryptoMetadata(string $symbol): Collection
+    {
+        $info = Cache::remember('crypto_info_' . $symbol, now()->addMinutes(60), function () use ($symbol) {
+            return $this->client->get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/info", ['symbol' => $symbol])->json();
+        });
+
+        $metadata = new Collection();
+        $metadata->add([
+            'description' => $info['data'][$symbol]['description'],
+            'logo' => $info['data'][$symbol]['logo']
+        ]);
+
+        foreach ($info['data'][$symbol]['urls'] as $key => $value) {
+            $metadata->add([
+                'url' => $value,
+                'type' => $key
+
+            ]);
+        }
+
+        $metadata = $metadata->flatten(2)->reject(function ($value) {
+            return empty($value) || strlen($value) <= 13;
+        });
+        return $metadata;
+    }
+
+
+    /*
+    {
+        $info = Cache::remember('crypto_info_' . $symbol, now()->addMinutes(60), function () use ($symbol) {
+            return $this->client->get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/info", ['symbol' => $symbol])->json();
+        });
+
+        $metadata = new Collection();
+
+        //create a collection of all metadata for the given symbol
+
+        foreach ($info['data'][$symbol] as $key => $value) {
+            $metadata->add([
+                'key' => $key,
+                'value' => $value,
+            ]);
+        }
+
+        */
+
+
+
+
+
     /*
     public function getByVolume(string $symbol, string $currency): Collection
     {

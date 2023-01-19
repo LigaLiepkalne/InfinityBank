@@ -40,4 +40,9 @@ class CryptoService
     {
         return $this->cryptoRepository->getAscendingList($currency);
     }
+
+    public function getCryptoMetadata(string $symbol): Collection
+    {
+        return $this->cryptoRepository->getCryptoMetadata($symbol);
+    }
 }
