@@ -35,6 +35,12 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
+
+    th, td, tr {
+        text-align: center;
+        border-color: transparent;
+        border-width: 0;
+    }
 </style>
 
 <script>
@@ -71,9 +77,6 @@
                     </svg></button>
 
             </form>
-
-
-
             </div>
 
         </h2>
@@ -83,21 +86,87 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-9 ">
 
             <div class="highlights bg-transparent">
-                <div class="parent-element py-6 " style="display: inline-block;">
-                    <div class="element-container max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="element-content bg-white-500 overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="content-text p-6 bg-white border-b border-gray-200">
 
-                            </div>
+                <div class="parent-element py-6" style="display: inline-block; margin-right: 10px">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6">
+                            <h4>Top 3 by market cap</h4>
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Price change 24h</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($descendingCryptoTop as $index => $crypto)
+                                    <tr>
+                                        <th scope="row">{{ $index+1 }}</th>
+
+                                        <td class="crypto-inline"> <a href="/trade/search?query={{ $crypto->getSymbol() }}">
+                                                <img src="{{ $crypto->getLogoURL() }}" alt="crypto-logo" width="20" height="20"></a>
+                                            <span class="crypto-name">{{ $crypto->getName() }} <span class="grayed-out">{{ $crypto->getSymbol() }}</span></span>
+                                        </td>
+
+                                        <td>
+                                            {{ $crypto->getCurrency() }} {{ number_format($crypto->getPrice(), 2) }}
+                                        </td>
+
+                                        @if($crypto->getPercentChange24h() >= 0)
+                                            <td class="text-success"><i class="fas fa-caret-up me-1"></i> {{ number_format($crypto->getPercentChange24h(), 2) }} %</td>
+                                        @else
+                                            <td class="text-danger"><i class="fas fa-caret-down me-1"></i> {{ number_format($crypto->getPercentChange24h(), 2) }} %</td>
+                                        @endif
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+
+
+
+
+
                 <div class="parent-element py-6" style="display: inline-block;">
-                    <div class="element-container max-w-7xl mx-auto sm:px-6 lg:px-3">
-                        <div class="element-content bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="content-text p-6 border-b border-gray-200 ">
-                                By ascending price
-                            </div>
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6">
+                            <h4>Top 3 Lowest by Market cap</h4>
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Price change 24h</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($ascendingCryptoTop as $index => $crypto)
+                                    <tr>
+                                    <th scope="row">{{ $index+1 }}</th>
+
+                                    <td class="crypto-inline"> <a href="/trade/search?query={{ $crypto->getSymbol() }}">
+                                            <img src="{{ $crypto->getLogoURL() }}" alt="crypto-logo" width="20" height="20"></a>
+                                        <span class="crypto-name">{{ $crypto->getName() }} <span class="grayed-out">{{ $crypto->getSymbol() }}</span></span>
+                                    </td>
+
+                                    <td>
+                                        {{ $crypto->getCurrency() }} {{ number_format($crypto->getPrice(), 2) }}
+                                    </td>
+
+                                        @if($crypto->getPercentChange24h() >= 0)
+                                            <td class="text-success"><i class="fas fa-caret-up me-1"></i> {{ number_format($crypto->getPercentChange24h(), 2) }} %</td>
+                                        @else
+                                            <td class="text-danger"><i class="fas fa-caret-down me-1"></i> {{ number_format($crypto->getPercentChange24h(), 2) }} %</td>
+                                        @endif
+                                @endforeach
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

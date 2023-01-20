@@ -35,9 +35,14 @@ class CryptoService
         return $this->cryptoRepository->getByVolume($search, $currency);
     }
 
-    public function sortByAscendingPrice(string $currency=null): Collection
+    public function getAscendingTop(string $currency="EUR"): Collection
     {
-        return $this->cryptoRepository->getAscendingList($currency);
+        return $this->cryptoRepository->getAscendingTop($currency);
+    }
+
+    public function getDescendingTop(string $currency="EUR"): Collection
+    {
+        return $this->cryptoRepository->getDescendingTop($currency);
     }
 
     public function getCryptoMetadata(string $symbol): Collection

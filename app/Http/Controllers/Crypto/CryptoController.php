@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Crypto;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Repositories\Crypto\CoinMarketCapCryptoRepository;
 use App\Services\Crypto\CryptoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class CryptoController extends Controller
@@ -38,16 +40,20 @@ class CryptoController extends Controller
             return view('crypto.index', [
                 'cryptoCurrencies' => $cryptoCurrencies,
                 'currencies' => self::CURRENCIES,
-                // 'cryptoByVolume' => $cryptoByVolume,
             ]);
         }
-        // Cache::flush();
+       Cache::flush();
+
+        $ascendingCryptoTop = $this->cryptoCurrencyService->getAscendingTop();
+        $descendingCryptoTop = $this->cryptoCurrencyService->getDescendingTop();
+
         $cryptoCurrencies = $this->cryptoCurrencyService->getCryptoList(self::CRYPTO);
 
         return view('crypto.index', [
             'cryptoCurrencies' => $cryptoCurrencies,
             'currencies' => self::CURRENCIES,
-            // 'cryptoByVolume' => $cryptoByVolume,
+            'ascendingCryptoTop' => $ascendingCryptoTop,
+            'descendingCryptoTop' => $descendingCryptoTop,
         ]);
     }
 
@@ -60,7 +66,6 @@ class CryptoController extends Controller
         $crypto = $this->cryptoCurrencyService->getSingleCrypto($query);
 
         $metadata = $this->cryptoCurrencyService->getCryptoMetadata($query);
-        //Cache::flush();
 
         return view('crypto.show', [
             'userBankAccounts' => $userBankAccounts,

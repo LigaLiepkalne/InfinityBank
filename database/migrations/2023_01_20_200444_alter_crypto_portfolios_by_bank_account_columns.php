@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterCryptoTransactionsPrice extends Migration
+class AlterCryptoPortfoliosByBankAccountColumns extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class AlterCryptoTransactionsPrice extends Migration
      */
     public function up()
     {
-        Schema::table('crypto_transactions', function (Blueprint $table) {
+        Schema::table('crypto_portfolios_by_bank_account', function (Blueprint $table) {
             $table->decimal('price', 12, 6)->change();
+            $table->decimal('amount', 12, 6)->change();
             $table->decimal('total', 12, 6)->change();
-            $table->decimal('profit_loss', 12, 6)->change();
+            $table->decimal('price_sum', 12, 6)->change();
+            $table->decimal('avg_price', 12, 6)->change();
+
         });
     }
 
@@ -27,10 +30,12 @@ class AlterCryptoTransactionsPrice extends Migration
      */
     public function down()
     {
-        Schema::table('crypto_transactions', function (Blueprint $table) {
+        Schema::table('crypto_portfolios_by_bank_account', function (Blueprint $table) {
             $table->decimal('price', 12)->change();
+            $table->decimal('amount', 12)->change();
             $table->decimal('total', 12)->change();
-            $table->decimal('profit_loss', 12)->change();
+            $table->decimal('price_sum', 12)->change();
+            $table->decimal('avg_price', 12)->change();
         });
     }
 }
