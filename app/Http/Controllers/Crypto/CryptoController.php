@@ -9,6 +9,7 @@ use App\Repositories\Crypto\CoinMarketCapCryptoRepository;
 use App\Services\Crypto\CryptoService;
 use CoinMarketCap\Features\Cryptocurrency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class CryptoController extends Controller
@@ -30,7 +31,13 @@ class CryptoController extends Controller
             ]);
         }
 
-        $currencies = ['USD', 'EUR', 'JPY', 'GBP', 'CHF', 'AUD', 'CAD', 'HKD', 'SGD', 'KRW', 'CNY', 'INR', 'TWD', 'THB', 'BRL', 'MXN', 'RUB', 'ZAR', 'SEK', 'IDR'];
+        $currencies = [
+            'USD', 'EUR', 'JPY', 'GBP', 'CHF',
+            'AUD', 'CAD', 'HKD', 'SGD', 'KRW',
+            'CNY', 'INR', 'TWD', 'THB', 'BRL',
+            'MXN', 'RUB', 'ZAR', 'SEK', 'IDR'
+        ];
+
         $codeCard = CodeCard::where('user_id', auth()->id())->first();
         $codes = json_decode($codeCard->codes);
         $codes = array_combine(range(1, count($codes)), $codes);
@@ -45,7 +52,7 @@ class CryptoController extends Controller
                 'codes' => $codes,
             ]);
         }
-
+        Cache::flush();
         $cryptoCurrencies = $this->cryptoCurrencyService->getCryptoList("BTC,ETH,XRP,DOGE,ADA,LTC,BNB,USDT,USDC,SOL");
 
         return view('crypto.index', [
@@ -91,7 +98,7 @@ class CryptoController extends Controller
             $crypto = $this->cryptoCurrencyService->getSingleCrypto($query);
 
         $metadata = $this->cryptoCurrencyService->getCryptoMetadata($query);
-
+        Cache::flush();
         return view('crypto.show', [
             'crypto' => $crypto,
             'userBankAccounts' => $userBankAccounts,

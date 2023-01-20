@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
-
 class CurrencyApiRepository implements CurrencyRepository
 {
     public function __construct()
@@ -18,10 +17,7 @@ class CurrencyApiRepository implements CurrencyRepository
 
     public function getExchangeRates(): Collection
     {
-        // Try to get the data from cache
-        $data = Cache::get('exchangeRates');
-        // If the data isn't in cache, fetch it from the API
-        if (!$data) {
+        $data = Cache::remember('exchangeRates', 60, function () {
             $client = new Client();
             $response = $client->get('https://api.currencyapi.com/v3/latest', [
                 'query' => [
@@ -34,17 +30,14 @@ class CurrencyApiRepository implements CurrencyRepository
             ]);
             $responseBody = $response->getBody();
 
-            $data = json_decode($responseBody, true);
-
-            Cache::put('exchangeRates', $data, 100);
-        }
+            return json_decode($responseBody, true);
+        });
 
         $exchangeRates = collect();
         Carbon::parse($data['meta']['last_updated_at']);
 
         foreach ($data['data'] as $currency => $rate) {
-            $exchangeRates->push(new CurrencyExchangeRate($currency, $rate['value'], $data['meta']['last_updated_at'])
-            );
+            $exchangeRates->push(new CurrencyExchangeRate($currency, $rate['value'], $data['meta']['last_updated_at']));
         }
         return $exchangeRates;
     }
@@ -68,5 +61,4 @@ class CurrencyApiRepository implements CurrencyRepository
             return $data['data'][$currency]['value'];
         });
     }
-
 }

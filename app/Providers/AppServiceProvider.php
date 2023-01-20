@@ -17,18 +17,8 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        /*
-        $this->app->singleton(AccountOperationsService::class, function ($app) {
-            return new AccountOperationsService(new Account());
-        });
-*/
         $this->app->bind(CryptoRepository::class, CoinMarketCapCryptoRepository::class);
         $this->app->singleton(CryptoService::class, function ($app) {
             return new CryptoService($app->make(CryptoRepository::class));
@@ -46,20 +36,12 @@ class AppServiceProvider extends ServiceProvider
             return new SellCryptoService($app->make(CryptoRepository::class));
         });
 
-
         $this->app->bind(CurrencyRepository::class, CurrencyApiRepository::class);
         $this->app->singleton(CurrencyApiService::class, function ($app) {
             return new CurrencyApiService($app->make(CurrencyRepository::class));
         });
-
-
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         View::composer(

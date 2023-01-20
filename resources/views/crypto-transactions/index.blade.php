@@ -98,6 +98,7 @@
                                 <th>#</th>
                                 <th>Date</th>
                                 <th>Currency</th>
+                                <th>Price</th>
                                 <th>Details</th>
                                 <th>Amount</th>
                                 <th>Total</th>
@@ -125,6 +126,9 @@
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->symbol }}</p>
                                         </td>
+                                    <td>
+                                        <p class="fw-normal mb-1">{{ $transaction->price }}</p>
+                                    </td>
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->type }}</p>
                                         </td>

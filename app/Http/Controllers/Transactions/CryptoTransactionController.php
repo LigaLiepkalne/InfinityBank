@@ -12,11 +12,13 @@ class CryptoTransactionController
     public function index(Request $request): View
     {
         $userBankAccounts = Account::where('user_id', auth()->id())->get();
-        $transactions = CryptoTransaction::whereIn('bank_account_id', $userBankAccounts->pluck('id'))->latest()->get();
+        $transactions = CryptoTransaction::whereIn('bank_account_id', $userBankAccounts
+            ->pluck('id'));
 
-       if($request->has('start-date') && $request->has('end-date')) {
-            $transactions = $transactions->whereBetween('created_at', [$request->get('start-date'), $request->get('end-date')]);
-      }
+        if ($request->has('start-date') && $request->has('end-date')) {
+            $transactions = $transactions->whereDate('created_at', '>=', $request->get('start-date'))
+                ->whereDate('created_at', '<=',$request->get('end-date'));
+        }
 
         $selectedAccount = Account::where('number', $request->get('account'))->get();
         if ($request->has('account')) {
@@ -24,39 +26,12 @@ class CryptoTransactionController
             $transactions = $transactions->where('bank_account_id', $id);
         }
 
-/*
-       $selectedAccount = Account::where('number', $request->get('account'))->first();
-       $id = $selectedAccount->id;
-
-       if($request->has('account')) {
-          $transactions = $transactions->where('bank_account_id', $id);
-        }
-*/
-/*
-        $selectedAccount = Account::where('number', $request->get('account'))->get();
-        if ($selectedAccount->isNotEmpty()) {
-            $id = $selectedAccount->pluck('id')->first();
-            $transactions = $transactions->where('bank_account_id', $id);
-        }
-*/
-/*
-        if($request->has('account')) {
-            $selectedAccount = Account::where('number', $request->get('account'))->first();
-            $id = $selectedAccount->id;
-            $transactions = $transactions->where('bank_account_id', $id);
-        }
-
-        var_dump($transactions);
-        */
         return view('crypto-transactions.index', [
-            'transactions' => $transactions,
+            'transactions' => $transactions->latest()->get(),
             'userBankAccounts' => $userBankAccounts,
         ]);
-
     }
-
 }
 
-//Filtrēšanas opcija transākcijām (iespējamība atslatīt noteiktu konta numuru (account), datumu no-līdz),
 
 
