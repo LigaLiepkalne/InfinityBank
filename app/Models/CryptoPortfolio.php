@@ -14,13 +14,11 @@ class CryptoPortfolio extends Model
     protected $table = 'crypto_portfolios_by_bank_account';
     protected $primaryKey = 'id';
 
-    // one bank account has one crypto portfolio
     public function bankAccount(): BelongsTo
     {
         return $this->belongsTo(Account::class);
     }
 
-    // one crypto portfolio has many crypto
     public function crypto(): HasMany
     {
         return $this->hasMany(Crypto::class);

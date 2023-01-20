@@ -4,15 +4,12 @@ namespace App\Rules;
 
 use App\Models\CodeCard;
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
 
 class TransferValidationRules implements Rule
 {
-
     public function passes($attribute, $value)
     {
-
         $codeCard = CodeCard::where('user_id', auth()->id())->first();
         $codes = json_decode($codeCard->codes);
         $codes = array_combine(range(1, count($codes)), $codes);
@@ -44,5 +41,4 @@ class TransferValidationRules implements Rule
                 return '';
         }
     }
-
 }

@@ -72,5 +72,4 @@ class TradeCryptoServiceRequest
     {
         return $this->priceAvg;
     }
-
 }

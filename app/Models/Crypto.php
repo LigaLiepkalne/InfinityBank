@@ -2,41 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-class Crypto extends Model
+class Crypto
 {
-
-    /*
-    use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'symbol',
-        'date_added',
-        'last_updated',
-        'price',
-        'volume_24h',
-        'percent_change_24h',
-        'market_cap',
-        'logo_url',
-    ];
-*/
-    /*
-    use HasFactory;
-
-    // crypto belongs to one crypto portfolio
-    public function cryptoPortfolio(): BelongsTo
-    {
-        return $this->belongsTo(CryptoPortfolio::class);
-    }
-    */
-
-
-
-private string $id;
+    private string $id;
     private string $name;
     public string $symbol;
     private string $dateAdded;
@@ -52,18 +20,18 @@ private string $id;
 
     public function __construct(
 
-        string $id,
-        string $name,
-        string $symbol,
-        string $dateAdded,
-        string $lastUpdated,
-        float  $price,
-        float  $volume24h,
-        float  $percentChange1h,
-        float  $percentChange24h,
-        float  $percentChange7d,
-        float  $marketCap,
-        string $currency,
+        string  $id,
+        string  $name,
+        string  $symbol,
+        string  $dateAdded,
+        string  $lastUpdated,
+        float   $price,
+        float   $volume24h,
+        float   $percentChange1h,
+        float   $percentChange24h,
+        float   $percentChange7d,
+        float   $marketCap,
+        string  $currency,
         ?string $logoURL = null
     )
 

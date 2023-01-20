@@ -15,7 +15,7 @@ class CodeMatchRule implements Rule
 
     public function passes($attribute, $value)
     {
-        $codeIndex = request()->input('code_index');
+        $codeIndex = request()->get('code_index');
 
         return $value === $this->codes[$codeIndex];
     }

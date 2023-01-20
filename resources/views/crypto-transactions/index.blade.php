@@ -132,9 +132,15 @@
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->type }}</p>
                                         </td>
-                                        <td>
-                                            <p class="fw-normal mb-1">{{ $transaction->amount }}
-                                        </td>
+                                    <td>
+                                        <p class="fw-normal mb-1">
+                                            @if(substr($transaction->amount, -4) == "00000")
+                                                {{ number_format($transaction->amount, 2) }}
+                                            @else
+                                                {{ rtrim(number_format($transaction->amount, 4, '.', ''), '0') }}
+                                            @endif
+                                        </p>
+                                    </td>
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->total }}</p>
                                         </td>

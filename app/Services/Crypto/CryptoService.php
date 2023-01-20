@@ -2,7 +2,6 @@
 
 namespace App\Services\Crypto;
 
-use App\Models\Collections\CryptoCollection;
 use App\Models\Crypto;
 use App\Repositories\Crypto\CryptoRepository;
 use Illuminate\Support\Collection;

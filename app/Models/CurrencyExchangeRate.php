@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-
 class CurrencyExchangeRate {
     private string $symbol;
     private string $rate;

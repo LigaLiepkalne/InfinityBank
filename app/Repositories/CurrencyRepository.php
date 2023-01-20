@@ -9,5 +9,4 @@ interface CurrencyRepository
     public function getExchangeRates(): Collection;
 
     public function getExchangeRate($currency): float;
-
 }

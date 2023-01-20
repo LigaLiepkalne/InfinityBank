@@ -30,7 +30,4 @@ class CryptoTransaction extends Model
         'recipient_name',
         'recipient_surname',
     ];
-
-
-
 }

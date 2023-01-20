@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Crypto;
-use App\Models\Collections\CryptoCollection;
 use App\Models\Crypto;
 use Illuminate\Support\Collection;
 

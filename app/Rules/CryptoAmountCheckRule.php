@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Rules;
+
 use App\Models\CryptoPortfolio;
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\Account;
 
 class CryptoAmountCheckRule implements Rule
 {

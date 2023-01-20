@@ -10,15 +10,12 @@ class OwnAccountRule implements Rule
 {
     public function passes($attribute, $value)
     {
-
         $account = Account::find($value);
 
         if ($account->user_id == Auth::id()) {
             return true;
         }
-
         return false;
-
     }
 
     public function message()
