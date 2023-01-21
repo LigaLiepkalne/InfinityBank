@@ -8,6 +8,7 @@ use App\Models\CodeCard;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Rules\CodeMatchRule;
+use App\Rules\RecipientExistsRule;
 use App\Services\CurrencyExchangeRate\CurrencyApiService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -51,6 +52,7 @@ class AccountOperationsController extends Controller
         $codes = array_combine(range(1, count($codes)), $codes);
 
         $request->validate([
+            'recipient' => ['required', 'string',  new RecipientExistsRule()],
             'from_account' => ['required', Rule::exists('accounts', 'number')->where(function ($query) {
                 $query->where('user_id', auth()->id());
             })],

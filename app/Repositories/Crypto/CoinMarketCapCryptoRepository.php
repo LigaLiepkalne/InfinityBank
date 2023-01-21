@@ -85,7 +85,6 @@ class CoinMarketCapCryptoRepository implements CryptoRepository
 
         $crypto = $crypto['data'][$symbol];
         return $crypto['quote'][$currency]['price'];
-
     }
 
     public function getCryptoMetadata(string $symbol): Collection
@@ -150,7 +149,7 @@ class CoinMarketCapCryptoRepository implements CryptoRepository
         return $cryptoCollection;
     }
 
-
+    //additional crypto highlights for index view
     public function getDescendingTop(string $currency): Collection
     {
         $response = Cache::remember('descendingList' . $currency, now()->addMinutes(60),

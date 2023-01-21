@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Crypto;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Repositories\Crypto\CoinMarketCapCryptoRepository;
 use App\Services\Crypto\CryptoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;

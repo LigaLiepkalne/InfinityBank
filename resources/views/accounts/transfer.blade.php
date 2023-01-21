@@ -93,7 +93,7 @@
                 $('#from_account').hide();
                 $('#balance').hide();
                 $('#to_currency').hide();
-                $('#currency').hide();
+                //$('#currency').hide();
                 $('#details').hide();
 
                 // toggle visibility of their labels
@@ -107,34 +107,34 @@
                 const recipient = $('#recipient').val();
                 const amount = $('#amount').val();
                 const toAccount = $('#to_account').val();
-                const currency = $('#currency').val();
+              //  const currency = $('#currency').val();
                 const details = $('#details').val();
                 const fromAccount = $('#from_account').val();
 
                 // retrieve the currency of the from account
-                const fromAccountCurrency = $('#from_account').find(':selected').data('currency');
+               // const fromAccountCurrency = $('#from_account').find(':selected').data('currency');
                 // retrieve the currency of the to account
-                const toAccountCurrency = $('#to_currency').text();
+              //  const toAccountCurrency = $('#to_currency').text();
 
                 // update the text of the corresponding span elements in the summary
                 $('span[name="recipient"]').text(recipient);
                 $('span[name="to_account"]').text(toAccount);
                 $('span[name="amount"]').text(amount);
-                $('span[name="currency"]').text(currency);
+               // $('span[name="currency"]').text(currency);
                 $('span[name="details"]').text(details);
                 $('span[name="from_account"]').text(fromAccount);
 
                 // get the selected option element
-                const selectedOption = $('#currency').find(':selected');
+                //const selectedOption = $('#currency').find(':selected');
                 // get the exchange rate from the data attribute
-                const exchangeRate = selectedOption.data('rate').toFixed(2);
+                //const exchangeRate = selectedOption.data('rate').toFixed(2);
                 // update the exchange rate
-                $('#exchange-rate').text(exchangeRate);
+                //$('#exchange-rate').text(exchangeRate);
                 // calculate the amount in the currency of the to account
-                const convertedAmount = (amount * exchangeRate).toFixed(2);
-                $('span[name="converted-amount"]').text(convertedAmount);
+               // const convertedAmount = (amount * exchangeRate).toFixed(2);
+               // $('span[name="converted-amount"]').text(convertedAmount);
 
-                $('span[name="currency"]').text(toAccountCurrency + ' (exchange rate: ' + exchangeRate + ' ' + fromAccountCurrency + ' - ' + toAccountCurrency + ')');
+                $('span[name="currency1"]').text(toAccountCurrency + ' (exchange rate: ' + exchangeRate + ' ' + fromAccountCurrency + ' - ' + toAccountCurrency + ')');
 
                 // change button text to "Transfer"
                 $(this).text('Confirm Payment');
@@ -147,7 +147,7 @@
                     $('#from_account').show();
                     $('#balance').show();
                     $('#to_currency').show();
-                    $('#currency').show();
+                    //$('#currency').show();
                     $('#details').show();
 
                     $('label[for="recipient"]').show();
@@ -267,11 +267,7 @@
                 <x-input id="amount" class="block mt-1 w-5/6" style="margin-left:82px; margin-right:5px;" type="text" name="amount" required autofocus />
 
                 <!-- Select currency-->
-                <select style="color: #2563eb" name="currency" id="currency" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6">
-                    @foreach ($exchangeRates as $rate)
-                        <option value="{{ $rate->getSymbol() }}" data-rate="{{ $rate->getRate() }}">{{ $rate->getSymbol() }}</option>
-                    @endforeach
-                </select>
+
             </div>
 
             <!-- make input for Details-->
@@ -289,7 +285,7 @@
                     <p>Beneficiary: <span name="recipient"></span></p>
                     <p>Beneficiary's account: <span name="to_account"></span></p>
 
-                    <p>Payment amount: <span name="converted-amount"></span> <span name="currency"></span></p>
+                    <p>Payment amount: <span name="converted-amount"></span> <span name="currency1"></span></p>
                     <p>Details: <span name="details"></span></p>
 
 
