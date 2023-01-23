@@ -2,9 +2,12 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <img id="featured-image" src="../pngwing.com.png" class="w-30 h-20 fill-current text-gray-500" alt=""/>
             </a>
         </x-slot>
+
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -14,7 +17,6 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-label for="email" :value="__('Email')" />
@@ -46,10 +48,9 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
+                    <button class="ml-3 btn btn-dark btn-rounded btn-primary">
+                        <b> {{ __('Log in') }}</b>
+                    </button>
             </div>
         </form>
     </x-auth-card>

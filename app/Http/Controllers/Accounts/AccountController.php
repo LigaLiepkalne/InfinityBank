@@ -5,18 +5,22 @@ namespace App\Http\Controllers\Accounts;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\CodeCard;
+use App\Models\CryptoPortfolio;
 use App\Models\Transaction;
 use App\Services\Crypto\CryptoPortfolioService;
+use App\Services\CurrencyExchangeRate\CurrencyApiService;
 use DateTime;
 use Illuminate\View\View;
 
 class AccountController extends Controller
 {
     private CryptoPortfolioService $cryptoPortfolioService;
+    private CurrencyApiService $currencyApiService;
 
-    public function __construct(CryptoPortfolioService $cryptoPortfolioService)
+    public function __construct(CryptoPortfolioService $cryptoPortfolioService, CurrencyApiService $currencyApiService)
     {
         $this->cryptoPortfolioService = $cryptoPortfolioService;
+        $this->currencyApiService = $currencyApiService;
     }
 
     public function index(): View
@@ -27,7 +31,38 @@ class AccountController extends Controller
 
         $userBankAccounts = Account::where('user_id', auth()->id())->get();
 
-        return view('dashboard', ['userBankAccounts' => $userBankAccounts, 'codes' => $codes]);
+        $totalBalance8 = 0;
+        foreach ($userBankAccounts as $account) {
+            $totalBalance8 += $account->balance;
+        }
+
+        //get user account count
+        $userAccountCount = Account::where('user_id', auth()->id())->count();
+
+        //get diffferent user account currency count
+        $userAccountCurrencyCount = Account::where('user_id', auth()->id())->distinct('currency')->count('currency');
+
+
+        //get $userBankAccounts crypto_portfolios_by_bank_account
+        //$userBankAccountsCryptoPortfolios = [];
+        $userCryptoPortfoliosCount = CryptoPortfolio::whereIn('bank_account_id', $userBankAccounts->pluck('id'))->distinct()->get(['bank_account_id']);
+        $userCryptoPortfoliosCount = $userCryptoPortfoliosCount->count();
+
+/*
+        $totalBalance = 0;
+        foreach ($userBankAccounts as $account) {
+            $totalBalance += $account->balance * $this->currencyApiService->getExchangeRate($account->currency);
+        }
+*/
+
+        return view('dashboard', [
+            'userBankAccounts' => $userBankAccounts,
+            'codes' => $codes,
+            'totalBalance8' => $totalBalance8,
+            'userAccountCount' => $userAccountCount,
+            'userAccountCurrencyCount' => $userAccountCurrencyCount,
+            'userCryptoPortfoliosCount' => $userCryptoPortfoliosCount,
+        ]);
     }
 
     public function show(string $id): View

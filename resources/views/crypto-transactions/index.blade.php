@@ -46,9 +46,9 @@
 
     <x-slot name="header">
 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Transaction history
-        </h2>
+        <h1 class="font-semibold text-xxl text-center text-gray-400 leading-tight bg-green-100">
+        Transaction history
+        </h1>
 
     </x-slot>
 

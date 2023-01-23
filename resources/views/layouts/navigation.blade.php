@@ -18,18 +18,32 @@
     .settings{
         font-size: 15px;
     }
+
+    .big-text{
+        font-size: 40px;
+    }
+
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .line-backgound {
+        background-color: #e0ece7;
+    }
+
 </style>
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="line-backgound">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
-                    </a>
+                <div class="shrink-0 flex items-center" onclick="location.href='{{ route('dashboard') }}'">
+                    <span class="big-text"><b>InfinityBank</b></span>
+                        <img id="featured-image" src="../pngwing.com.png" style="width: 40px" alt=""/>
                 </div>
 
                 <div x-component>
@@ -64,11 +78,11 @@
 
                 <!-- Navigation Links -->
                 <div  class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex
-                inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5
+                inline-flex items-center px-1 pt-1 border-indigo-400 text-sm font-semibold leading-5
                 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="flex items-center text-sm font-medium text-black-500 hover:text-gray-700
+                            <button class="flex items-center text-sm font-semibold text-black-500 hover:text-gray-700
                             hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                 <div class="navbar-item my-class">{{ __('Accounts') }}</div>
 
@@ -97,11 +111,11 @@
 
 
                 <div  class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex
-                inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5
+                inline-flex items-center px-1 pt-1 border-indigo-400 text-sm font-semibold leading-5
                 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="flex items-center text-sm font-medium text-black-500 hover:text-gray-700
+                            <button class="flex items-center text-sm font-bold text-black-500 hover:text-gray-700
                             hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                 <div class="navbar-item my-class"> {{ __('Crypto Investments') }}</div>
 
@@ -131,7 +145,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div class="settings">Welcome, {{ Auth::user()->name }} {{ Auth::user()->surname }}!</div>
+                            <div class="settings font-semibold">Welcome, {{ Auth::user()->name }} {{ Auth::user()->surname }}!</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
