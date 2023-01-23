@@ -33,12 +33,16 @@ class CryptoController extends Controller
                 'cryptos' => $crypto,
             ]);
         }
-
+        Cache::flush();
         if ($request->get('currency') !== null) {
+            $ascendingCryptoTop = $this->cryptoCurrencyService->getAscendingTop($request->get('currency'));
+            $descendingCryptoTop = $this->cryptoCurrencyService->getDescendingTop($request->get('currency'));
             $cryptoCurrencies = $this->cryptoCurrencyService->getCryptoList(self::CRYPTO, $request->get('currency'));
             return view('crypto.index', [
                 'cryptoCurrencies' => $cryptoCurrencies,
                 'currencies' => self::CURRENCIES,
+                'ascendingCryptoTop' => $ascendingCryptoTop,
+                'descendingCryptoTop' => $descendingCryptoTop,
             ]);
         }
        Cache::flush();

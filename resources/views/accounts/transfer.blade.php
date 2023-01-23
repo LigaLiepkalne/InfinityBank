@@ -51,6 +51,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+
         $(document).ready(function() {
             // hide password and code fields by default
             $('#password').hide();
@@ -107,7 +108,7 @@
                 const recipient = $('#recipient').val();
                 const amount = $('#amount').val();
                 const toAccount = $('#to_account').val();
-              //  const currency = $('#currency').val();
+               // const fromCurrency = $('#currency').val();
                 const details = $('#details').val();
                 const fromAccount = $('#from_account').val();
 
@@ -134,7 +135,7 @@
                // const convertedAmount = (amount * exchangeRate).toFixed(2);
                // $('span[name="converted-amount"]').text(convertedAmount);
 
-                $('span[name="currency1"]').text(toAccountCurrency + ' (exchange rate: ' + exchangeRate + ' ' + fromAccountCurrency + ' - ' + toAccountCurrency + ')');
+                //$('span[name="currency1"]').text(toAccountCurrency + ' (exchange rate: ' + exchangeRate + ' ' + fromAccountCurrency + ' - ' + toAccountCurrency + ')');
 
                 // change button text to "Transfer"
                 $(this).text('Confirm Payment');
@@ -184,6 +185,14 @@
         });
         </script>
 
+    <script>
+        $(document).ready(function() {
+            $('#from_account').change(function() {
+                const currency = $(this).find(':selected').data('currency');
+                $('#currency').text(currency);
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -198,6 +207,8 @@
             });
         });
         </script>
+
+
 <style>
 
     .label-text {
@@ -247,16 +258,15 @@
                     @foreach ($userBankAccounts as $index => $account)
                         @if ($index === 0)
                             <option value="{{ $account->number }}" data-balance="{{ $account->balance }}" data-currency="{{ $account->currency }}" selected>
-                                {{ $account->number }} {{ $account->user->name }} {{ $account->user->surname }}
+                                {{ $account->number }} {{ $account->logo }} {{ $account->balance }} {{ $account->currency }}
                             </option>
                         @else
                             <option value="{{ $account->number }}" data-balance="{{ $account->balance }}" data-currency="{{ $account->currency }}">
-                                {{ $account->number }} {{ $account->user->name }} {{ $account->user->surname }}
+                                {{ $account->number }} {{ $account->logo }} {{ $account->balance }} {{ $account->currency }}
                             </option>
                         @endif
                     @endforeach
                 </select>
-                <x-label id="balance" style="display: inline-block; margin-left: unset;" class="w-1/6 block font-medium text-sm text-gray-700">Available: {{ $userBankAccounts[0]->balance }} {{ $userBankAccounts[0]->currency }}</x-label>
             </div>
 
             <!-- input AMOUNT-->
@@ -284,11 +294,8 @@
                     <h3>Payment summary</h3>
                     <p>Beneficiary: <span name="recipient"></span></p>
                     <p>Beneficiary's account: <span name="to_account"></span></p>
-
-                    <p>Payment amount: <span name="converted-amount"></span> <span name="currency1"></span></p>
+                    <p>Payment amount: <span name="amount">{{ $userBankAccounts[0]->currency }}</span> <span id="currency"></span></p>
                     <p>Details: <span name="details"></span></p>
-
-
                 </div>
             </div>
 

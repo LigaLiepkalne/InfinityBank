@@ -4,6 +4,7 @@ use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Accounts\AccountOperationsController;
 use App\Http\Controllers\Accounts\CloseAccountController;
 use App\Http\Controllers\Accounts\OpenAccountController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Crypto\CryptoController;
 use App\Http\Controllers\Crypto\TradeController;
 use App\Http\Controllers\Transactions\CryptoTransactionController;

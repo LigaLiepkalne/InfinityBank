@@ -143,10 +143,6 @@
 
                     <x-slot name="content">
 
-                        <x-dropdown-link :href="route('logout')">
-                            {{ __('Settings') }}
-                        </x-dropdown-link>
-
                         <x-dropdown-link data-toggle="modal" data-target="#codeModal">
                             {{ __('Code Card') }}
                         </x-dropdown-link>

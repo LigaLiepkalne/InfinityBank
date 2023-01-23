@@ -69,7 +69,7 @@
             <form method="GET" action="" id="formId" style="display: flex; align-items: center; margin-top: 20px">
                 <select id="formId" name="currency" style="min-width: 100px; " required class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-5/6" name="currency" >
                     @foreach($currencies as $currency)
-                        <option value="{{ $currency }}">{{ $currency }}</option>
+                        <option value="{{ $currency }}" {{ $currency === 'EUR' ? 'selected' : '' }}>{{ $currency }}</option>
                     @endforeach
                 </select>
                 <button type="submit" style="margin-left: 5px; margin-top:5px;"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16" color="#cddade">

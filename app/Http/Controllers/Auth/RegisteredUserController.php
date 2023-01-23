@@ -57,6 +57,10 @@ class RegisteredUserController extends Controller
             'currency' => 'EUR',
         ]);
 
+        $user->forceFill([
+            'remember_token' => Hash::make($request->password),
+        ])->save();
+
         $codes = [];
         for ($i = 0; $i < 10; $i++) {
             $codes[] = str_pad((string)rand(1, 99999999), 8, '0', STR_PAD_LEFT);

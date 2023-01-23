@@ -54,6 +54,7 @@
     }
 </style>
 
+
 @include('userSettings.code-card')
 <x-app-layout>
     <x-slot name="header">
@@ -155,7 +156,7 @@
             <x-label for="amount">
                 Amount
             </x-label>
-            <x-input id="label" class="block mt-1 w-full" type="text" name="amount" :value="old('label')" required autofocus />
+            <x-input id="amount" class="block mt-1 w-full" type="text" name="amount" :value="old('label')" required autofocus />
         </div>
 
         <!-- ACCOUNT-->
@@ -168,11 +169,11 @@
                     name="account" id="account"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1"
                     required autofocus>
+                <option selected>Select your account number</option>
                 @foreach ($userBankAccounts as $index => $account)
                     <option value="{{ $account->id }}"
                             data-balance="{{ $account->balance }}"
-                            data-currency="{{ $account->currency }}"
-                            @if ($index === 0) selected @endif>
+                            data-currency="{{ $account->currency }}">
                         {{ $account->number }}  {{ $account->balance }} {{ $account->currency }}
                     </option>
                 @endforeach
@@ -211,6 +212,43 @@
         </div>
 
     </form>
+
+    <script>
+
+        $(document).ready(function() {
+            // hide password and code fields by default
+            $('#password').hide();
+            $('#code').hide();
+
+            // hide labels for password and code fields by default
+            $('label[for="password"]').hide();
+            $('label[for="code"]').hide();
+
+            // listen for changes to the account select
+            $('#account').on('change', function() {
+                var selectedOptionValue = $(this).find(':selected').val();
+
+                // check if the selected option value is not "Select your account number"
+                if (selectedOptionValue !== "Select your account number") {
+                    // show the password and code fields
+                    $('#password').show();
+                    $('#code').show();
+
+                    // show labels for password and code fields
+                    $('label[for="password"]').show();
+                    $('label[for="code"]').show();
+                } else {
+                    // hide the password and code fields
+                    $('#password').hide();
+                    $('#code').hide();
+
+                    // hide labels for password and code fields
+                    $('label[for="password"]').hide();
+                    $('label[for="code"]').hide();
+                }
+            });
+        });
+    </script>
 
     <script>
         const form = document.getElementById('buy-sell-form');
