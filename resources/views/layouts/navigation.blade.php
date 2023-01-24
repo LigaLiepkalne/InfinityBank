@@ -21,6 +21,7 @@
 
     .big-text{
         font-size: 40px;
+        color: #1a202c;
     }
 
     nav {
@@ -30,7 +31,11 @@
     }
 
     .line-backgound {
-        background-color: #e0ece7;
+        background: rgb(188,202,207);
+        background: -moz-radial-gradient(circle, rgba(188,202,207,1) 7%, rgba(153,183,190,1) 64%, rgba(159,185,185,1) 67%, rgba(206,207,205,1) 100%);
+        background: -webkit-radial-gradient(circle, rgba(188,202,207,1) 7%, rgba(153,183,190,1) 64%, rgba(159,185,185,1) 67%, rgba(206,207,205,1) 100%);
+        background: radial-gradient(circle, rgba(188,202,207,1) 7%, rgba(153,183,190,1) 64%, rgba(159,185,185,1) 67%, rgba(206,207,205,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#bccacf",endColorstr="#cecfcd",GradientType=1);
     }
 
 </style>

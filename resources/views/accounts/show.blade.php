@@ -1,40 +1,48 @@
+
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- Close account form-->
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: auto;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-group label {
+        width: 100px;
+
+    }
+
+    .form-group input,
+    .form-group select {
+        flex: 1;
+    }
+    h4 {
+        justify-content: left;
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #8f9c9f;
+    }
+
+</style>
+@include('userSettings.code-card')
+
 <x-app-layout>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-
-    <!-- Close account form-->
-    <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom: auto;
-
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-        }
-
-        .form-group label {
-            width: 100px;
-
-        }
-
-        .form-group input,
-        .form-group select {
-            flex: 1;
-        }
-    </style>
-
     <x-slot name="header">
-
+        <h4 class="font-semibold"> {{$userBankAccount->number}} {{$userBankAccount->label}}</h4>
         <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button
@@ -93,7 +101,7 @@
 
     </x-slot>
 
-    <div class="py-6">
+    <div class="py-6 ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -114,8 +122,8 @@
                                 </div>
 
                                 <div class="flex items-center justify-left">
-                                    <x-button class="ml-4">
-                                        {{ __('Update') }}
+                                    <x-button class="ml-4" style="background-color:#333839; border-radius: 30px">
+                                        <b> {{ __('Update') }}</b>
                                     </x-button>
                                 </div>
                             </form>
@@ -161,8 +169,8 @@
                                 </div>
 
                                 <div class="flex items-center justify-end ">
-                                    <x-button class="ml-4">
-                                        {{ __('Close') }}
+                                    <x-button class="ml-4" style="background-color: #333839; border-radius: 30px">
+                                        <b>{{ __('Close') }}</b>
                                     </x-button>
                                 </div>
                             </form>
