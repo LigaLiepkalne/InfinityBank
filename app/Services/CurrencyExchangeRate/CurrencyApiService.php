@@ -2,7 +2,7 @@
 
 namespace App\Services\CurrencyExchangeRate;
 
-use App\Repositories\CurrencyApiRepository;
+use App\Repositories\Currency\CurrencyApiRepository;
 use Illuminate\Support\Collection;
 
 class CurrencyApiService

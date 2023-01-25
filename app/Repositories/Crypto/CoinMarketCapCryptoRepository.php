@@ -73,20 +73,6 @@ class CoinMarketCapCryptoRepository implements CryptoRepository
         return $this->buildModel($crypto, $currency);
     }
 
-    public function getCryptoPrice(string $symbol, string $currency = 'EUR'): float
-    {
-        $crypto = Cache::remember('cryptoLatest' . $symbol . $currency, now()->addMinutes(60),
-            function () use ($symbol, $currency) {
-                return $this->client->get(
-                    'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
-                    ['symbol' => $symbol, 'convert' => $currency]
-                )->json();
-            });
-
-        $crypto = $crypto['data'][$symbol];
-        return $crypto['quote'][$currency]['price'];
-    }
-
     public function getCryptoMetadata(string $symbol): Collection
     {
         $info = Cache::remember('cryptoInfo' . $symbol, now()->addMinutes(60),

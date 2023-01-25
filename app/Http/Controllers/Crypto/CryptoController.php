@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Services\Crypto\CryptoService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class CryptoController extends Controller
@@ -33,7 +32,7 @@ class CryptoController extends Controller
                 'cryptos' => $crypto,
             ]);
         }
-        Cache::flush();
+
         if ($request->get('currency') !== null) {
             $ascendingCryptoTop = $this->cryptoCurrencyService->getAscendingTop($request->get('currency'));
             $descendingCryptoTop = $this->cryptoCurrencyService->getDescendingTop($request->get('currency'));
@@ -45,7 +44,6 @@ class CryptoController extends Controller
                 'descendingCryptoTop' => $descendingCryptoTop,
             ]);
         }
-       Cache::flush();
 
         $ascendingCryptoTop = $this->cryptoCurrencyService->getAscendingTop();
         $descendingCryptoTop = $this->cryptoCurrencyService->getDescendingTop();

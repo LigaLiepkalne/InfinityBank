@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Currency;
 
-use GuzzleHttp\Client;
 use App\Models\CurrencyExchangeRate;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 

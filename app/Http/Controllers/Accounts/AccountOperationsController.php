@@ -124,12 +124,6 @@ class AccountOperationsController extends Controller
         return redirect()->back()->with('success', 'Payment successful');
     }
 
-    public function showSenderBalance(Request $request): JsonResponse
-    {
-        $balance = Account::where('number', $request->get('from_account'))->value('balance');
-        return response()->json(['balance' => $balance]);
-    }
-
     public function showRecipientCurrency(Request $request): JsonResponse
     {
         $currency = DB::table('accounts')->where('number', $request->account)->value('currency');

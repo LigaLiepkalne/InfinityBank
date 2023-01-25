@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Currency;
 
 use Illuminate\Support\Collection;
 

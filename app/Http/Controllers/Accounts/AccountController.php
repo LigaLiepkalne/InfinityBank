@@ -31,34 +31,25 @@ class AccountController extends Controller
 
         $userBankAccounts = Account::where('user_id', auth()->id())->get();
 
-        $totalBalance8 = 0;
-        foreach ($userBankAccounts as $account) {
-            $totalBalance8 += $account->balance;
-        }
-
-        //get user account count
         $userAccountCount = Account::where('user_id', auth()->id())->count();
-
-        //get diffferent user account currency count
         $userAccountCurrencyCount = Account::where('user_id', auth()->id())->distinct('currency')->count('currency');
-
-
-        //get $userBankAccounts crypto_portfolios_by_bank_account
-        //$userBankAccountsCryptoPortfolios = [];
         $userCryptoPortfoliosCount = CryptoPortfolio::whereIn('bank_account_id', $userBankAccounts->pluck('id'))->distinct()->get(['bank_account_id']);
         $userCryptoPortfoliosCount = $userCryptoPortfoliosCount->count();
 
-/*
         $totalBalance = 0;
         foreach ($userBankAccounts as $account) {
             $totalBalance += $account->balance * $this->currencyApiService->getExchangeRate($account->currency);
         }
+/*
+        $totalBalanceNotConverted = 0;
+        foreach ($userBankAccounts as $account) {
+            $totalBalance8 += $account->balance;
+        }
 */
-
         return view('dashboard', [
             'userBankAccounts' => $userBankAccounts,
             'codes' => $codes,
-            'totalBalance8' => $totalBalance8,
+            'totalBalance' => $totalBalance,
             'userAccountCount' => $userAccountCount,
             'userAccountCurrencyCount' => $userAccountCurrencyCount,
             'userCryptoPortfoliosCount' => $userCryptoPortfoliosCount,
@@ -94,11 +85,6 @@ class AccountController extends Controller
         $currentMonthStart = new DateTime('first day of this month');
         $currentMonthEnd = new DateTime('last day of this month');
 
-        $codeCard = CodeCard::where('user_id', auth()->id())->first();
-        $codes = json_decode($codeCard->codes);
-        $codes = array_combine(range(1, count($codes)), $codes);
-        $codeIndex = rand(1, count($codes));
-
         if(!$userBankAccount = Account::where('id', $id)
             ->where('user_id', auth()->id())
             ->first())
@@ -109,8 +95,6 @@ class AccountController extends Controller
             'user' => $user,
             'userBankAccount' => $userBankAccount,
             'currentMonthTransactions' => $currentMonthTransactions,
-            'codes' => $codes,
-            'codeIndex' => $codeIndex,
             'debit' => $debit,
             'credit' => $credit,
             'currentMonthStart' => $currentMonthStart,

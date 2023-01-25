@@ -23,11 +23,5 @@ class CryptoTransaction extends Model
         'total',
         'type',
         'profit_loss',
-        'sender_account_number',
-        'recipient_account_number',
-        'sender_name',
-        'sender_surname',
-        'recipient_name',
-        'recipient_surname',
     ];
 }

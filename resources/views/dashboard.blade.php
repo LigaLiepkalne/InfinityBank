@@ -56,7 +56,7 @@
                     <h4 class="h1 font-weight-bold mb-3">
                         <i class="fas fa-piggy-bank icon-color"></i>
                         <span class="d-inline-block count-up" data-from="0" data-to="100"
-                              data-time="2000">{{ number_format($totalBalance8, 2) }}</span>
+                              data-time="2000">{{ number_format($totalBalance, 2) }}</span>
                     </h4>
                     <p class="font-weight-normal text-muted">Total value in EUR</p>
                 </div>
