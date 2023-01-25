@@ -105,6 +105,16 @@
     });
 </script>
 
+
+<script>
+    $(document).ready(function() {
+        $('#from_account').change(function() {
+            const currency = $(this).find(':selected').data('currency');
+            $('#currency').text(currency);
+        });
+    });
+</script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('to_account').addEventListener('change', function () {
@@ -136,7 +146,7 @@
     }
 
     input {
-        width: 345px;
+        width: 355px;
     }
 
     h3 {

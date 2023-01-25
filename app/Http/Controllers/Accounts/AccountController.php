@@ -88,8 +88,8 @@ class AccountController extends Controller
             return $transaction->created_at->month == now()->month;
         });
 
-        $credit = $currentMonthTransactions->where('type', 'Incoming Payment')->sum('received_amount');
-        $debit = $currentMonthTransactions->where('type', 'Outgoing Payment')->sum('sent_amount');
+        $credit = $currentMonthTransactions->where('type', 'Incoming Payment')->where('recipient_account', $userBankAccount->number)->sum('received_amount');
+        $debit = $currentMonthTransactions->where('type', 'Outgoing Payment')->where('sender_account', $userBankAccount->number)->sum('sent_amount');
 
         $currentMonthStart = new DateTime('first day of this month');
         $currentMonthEnd = new DateTime('last day of this month');

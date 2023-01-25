@@ -49,13 +49,13 @@
                         <tbody>
                         @foreach($currentMonthTransactions as $transaction)
                             <tr>
+                                @if($transaction->type === 'Outgoing Payment' && $transaction->sender_account === $userBankAccount->number)
                                 <td>
                                     <p class="fw-normal mb-1">{{$loop->index + 1}}</p>
                                 </td>
                                 <td>
                                     <p class="fw-normal mb-1"> {{ date("d.m.Y", strtotime($transaction->created_at)) }}</p>
                                 </td>
-                                @if($transaction->type === 'Outgoing Payment')
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->recipient_name }} {{ $transaction->recipient_surname }}</p>
                                         <p class="text-muted mb-0">{{ $transaction->recipient_account}}</p>
@@ -70,7 +70,13 @@
                                     <td>
                                         <p class="text-danger mb-0">{{ $transaction->sent_amount }} {{$userBankAccount->currency}} </p>
                                     </td>
-                                @else
+                                @elseif ($transaction->type === 'Incoming Payment' && $transaction->recipient_account === $userBankAccount->number)
+                                    <td>
+                                        <p class="fw-normal mb-1">{{$loop->index + 1}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="fw-normal mb-1"> {{ date("d.m.Y", strtotime($transaction->created_at)) }}</p>
+                                    </td>
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->sender_name }} {{ $transaction->sender_surname }}</p>
                                         <p class="text-muted mb-0">{{ $transaction->sender_account}}</p>
@@ -78,7 +84,7 @@
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->details }}</p>
                                         <p class="text-muted mb-0">{{ $transaction->sent_amount }}
-                                            , {{ $transaction->received_currency }}</p>
+                                            , {{ $transaction->sent_currency }}</p>
                                         <p class="text-muted mb-0">EXCHANGE RATE:{{ $transaction->conversion_rate }}</p>
                                     </td>
                                     <td>

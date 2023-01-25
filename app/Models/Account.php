@@ -32,5 +32,6 @@ class Account extends Model
         'number',
         'balance',
         'currency',
+        'label',
     ];
 }

@@ -77,7 +77,7 @@
                                 </td>
                                 <td>
                                     <p class="fw-normal mb-1">
-                                        {{  number_format($portfolio->avg_price, 2) }}{{ $userBankAccount->currency }}
+                                        {{  number_format($portfolio->avg_price, 2) }} {{ $userBankAccount->currency }}
                                     </p>
                                 </td>
                                 <td>
@@ -91,7 +91,13 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <p class="fw-normal mb-1">{{ number_format($portfolio->amount, 4) }}</p>
+                                    <p class="fw-normal mb-1">
+                                        @if(substr($portfolio->amount, -4) == "00000")
+                                            {{ number_format($portfolio->amount, 2) }}
+                                        @else
+                                            {{ rtrim(number_format($portfolio->amount, 4, '.', ''), '0') }}
+                                        @endif
+                                    </p>
                                 </td>
                                 <td>
                                     @if( number_format(($cryptoCurrentPrice[$key] * $portfolio->amount) -

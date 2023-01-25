@@ -95,8 +95,9 @@
                         <div class="card card-input" onclick="location.href='accounts/{{ $account->id }}'"
                              style="cursor:pointer;">
                             <div class="card-body">
-                                <p class="text-uppercase fw-bold text-muted">{{ $account->number }}</p>
-                                <p class="h2 fw-bold">{{ $account->balance }} {{ $account->currency }}</p>
+                                <p class="text-uppercase fw-bold text-muted" style="margin-bottom: auto">{{ $account->label }}</p>
+                                <p class="text-sm font-extralight text-muted" style="margin-top: auto">{{ $account->number }}</p>
+                                <p class="h3 fw-bold">{{ $account->balance }} {{ $account->currency }}</p>
                                 <p class="mb-0 font-weight-normal text-muted">Created: {{ date("d.m.Y", strtotime($account->created_at)) }}</p>
                             </div>
                         </div>

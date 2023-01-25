@@ -110,7 +110,7 @@
                                         <p class="fw-normal mb-1">{{ $transaction->symbol }}</p>
                                     </td>
                                     <td>
-                                        <p class="fw-normal mb-1">{{ $transaction->price }}</p>
+                                        <p class="fw-normal mb-1">{{ number_format($transaction->price, 2) }}</p>
                                     </td>
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->type }}</p>
@@ -125,7 +125,7 @@
                                         </p>
                                     </td>
                                     <td>
-                                        <p class="fw-normal mb-1">{{ $transaction->total }}</p>
+                                        <p class="fw-normal mb-1">{{ number_format($transaction->total, 2) }}</p>
                                     </td>
                                     @if($transaction->profit_loss !== null && $transaction->profit_loss >= 0)
                                         <td>

@@ -12,26 +12,27 @@
 <div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-body">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Code</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($codes as $index => $code)
-                        <tr>
-                            <th scope="row">{{ $index }}</th>
-                            <td>{{ $code }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <div class="modal-body p-4">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-header text-center" style="background-color: #8f9c9f; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        <h5 class="card-title" style="color: white;">Codes</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <tbody>
+                            @foreach ($codes as $index => $code)
+                                <tr>
+                                    <th scope="row">{{ $index }}</th>
+                                    <td>{{ $code }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <x-button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 30px">Close</x-button>
             </div>
         </div>
     </div>

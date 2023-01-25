@@ -42,14 +42,12 @@
 @include('userSettings.code-card')
 
 <x-app-layout>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
     <x-slot name="header">
         <h1 class="font-semibold text-xxl text-center leading-tight bg-green-100">
             Transaction history
         </h1>
     </x-slot>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
-
     <form class="mb-2 mt-4 text-center d-flex justify-content-center" method="GET"
           action="{{ route('transactions.index') }}">
         <!-- Select account-->
@@ -124,8 +122,7 @@
                                         </td>
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->details }}</p>
-                                            <p class="text-muted mb-0">{{ $transaction->received_amount }}
-                                                , {{ $transaction->sent_currency }}</p>
+                                            <p class="text-muted mb-0">{{ $transaction->received_amount }}, {{ $transaction->sent_currency }}</p>
                                             <p class="text-muted mb-0">EXCHANGE
                                                 RATE: {{ $transaction->conversion_rate }}</p>
                                         </td>
@@ -139,8 +136,7 @@
                                         </td>
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->details }}</p>
-                                            <p class="text-muted mb-0">{{ abs($transaction->sent_amount) }}
-                                                , {{ $transaction->received_currency }}</p>
+                                            <p class="text-muted mb-0">{{ abs($transaction->sent_amount) }}, {{ $transaction->received_currency }}</p>
                                             <p class="text-muted mb-0">EXCHANGE
                                                 RATE:{{ $transaction->conversion_rate }}</p>
                                         </td>

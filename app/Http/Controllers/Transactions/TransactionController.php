@@ -22,8 +22,13 @@ class TransactionController extends Controller
 
         if ($request->get('account')) {
             $transactions = $transactions->where(function ($query) use ($request) {
-                $query->where('recipient_account', $request->get('account'))
-                    ->orWhere('sender_account', $request->get('account'));
+                $query->where(function($query) use ($request){
+                    $query->where('recipient_account', $request->get('account'))
+                        ->where('type', 'Incoming Payment');
+                })->orWhere(function($query) use ($request){
+                    $query->where('sender_account', $request->get('account'))
+                        ->where('type', 'Outgoing Payment');
+                });
             });
         }
 
