@@ -34,6 +34,7 @@
 </script>
 
 @include('userSettings.code-card')
+
 <x-app-layout>
     <x-slot name="header">
             <form method="GET" action="/trade/search">
@@ -75,7 +76,7 @@
                 <div class="py-6" style="margin-right: 10px">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6">
-                            <h4 class="mb-3">Top 3 by market cap</h4>
+                            <h4 class="mb-3">Top 3 By Market Cap</h4>
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
@@ -117,7 +118,7 @@
                 <div class="parent-element py-6">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6">
-                            <h4 class="mb-3">Top 3 Lowest by Market cap</h4>
+                            <h4 class="mb-3">Top 3 Lowest By Market Cap</h4>
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>

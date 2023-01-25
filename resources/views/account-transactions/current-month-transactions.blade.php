@@ -1,5 +1,3 @@
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
-
 <style>
     .my-custom-scrollbar {
         position: relative;
@@ -17,10 +15,6 @@
         margin: 0 auto;
     }
 
-    td, th, tr {
-        border-color: transparent;
-    }
-
     table {
         margin: 0 auto;
     }
@@ -32,7 +26,8 @@
 </style>
 
 <div class="table-info bg-white max-w-8xl">
-    <h5 class="font-semibold">Period: {{ $currentMonthStart->format('d.m.Y') }}- {{ $currentMonthEnd->format('d.m.Y') }}</h5>
+    <h5 class="font-semibold">Period: {{ $currentMonthStart->format('d.m.Y') }}
+        - {{ $currentMonthEnd->format('d.m.Y') }}</h5>
 </div>
 
 <div class="py-1">
@@ -58,7 +53,7 @@
                                     <p class="fw-normal mb-1">{{$loop->index + 1}}</p>
                                 </td>
                                 <td>
-                                    <p class="fw-normal mb-1"> {{ date("d.m.Y", strtotime( $transaction->created_at)) }}</p>
+                                    <p class="fw-normal mb-1"> {{ date("d.m.Y", strtotime($transaction->created_at)) }}</p>
                                 </td>
                                 @if($transaction->type === 'Outgoing Payment')
                                     <td>
@@ -67,8 +62,10 @@
                                     </td>
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->details }}</p>
-                                        <p class="text-muted mb-0">{{ $transaction->received_amount }}, {{ $transaction->sent_currency }}</p>
-                                        <p class="text-muted mb-0">EXCHANGE RATE: {{ $transaction->conversion_rate }}</p>
+                                        <p class="text-muted mb-0">{{ $transaction->received_amount }}
+                                            , {{ $transaction->sent_currency }}</p>
+                                        <p class="text-muted mb-0">EXCHANGE
+                                            RATE: {{ $transaction->conversion_rate }}</p>
                                     </td>
                                     <td>
                                         <p class="text-danger mb-0">{{ $transaction->sent_amount }} {{$userBankAccount->currency}} </p>
@@ -80,11 +77,13 @@
                                     </td>
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->details }}</p>
-                                        <p class="text-muted mb-0">{{ $transaction->sent_amount }}, {{ $transaction->received_currency }}</p>
+                                        <p class="text-muted mb-0">{{ $transaction->sent_amount }}
+                                            , {{ $transaction->received_currency }}</p>
                                         <p class="text-muted mb-0">EXCHANGE RATE:{{ $transaction->conversion_rate }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-success mb-0"> +{{ $transaction->received_amount }} {{$userBankAccount->currency}}</p>
+                                        <p class="text-success mb-0">
+                                            +{{ $transaction->received_amount }} {{$userBankAccount->currency}}</p>
                                     </td>
                                 @endif
                             </tr>
@@ -101,6 +100,6 @@
     <h5> Closing balance {{ date("d.m.Y") }}
         <span class="font-semibold"><b>{{$userBankAccount->balance}} {{$userBankAccount->currency}}</b></span>
     </h5>
-    <p>Debit turnover <span class="text-danger"> {{ $debit }}</span>{{$userBankAccount->currency}}</p>
+    <p>Debit turnover <span class="text-danger"> {{ $debit }} </span>{{$userBankAccount->currency}}</p>
     <p>Credit turnover<span class="text-success"> +{{ $credit }} </span> {{$userBankAccount->currency}}</p>
 </div>

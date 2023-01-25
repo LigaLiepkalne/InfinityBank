@@ -26,10 +26,6 @@
         margin: 0 auto;
     }
 
-    td, th, tr {
-        border-color: transparent;
-    }
-
     table {
         margin: 0 auto;
     }
@@ -38,7 +34,6 @@
         text-align: center;
         min-block-size: 10px;
     }
-
 </style>
 
 <div class="table-info bg-white max-w-8xl">
@@ -74,11 +69,9 @@
                         <tbody>
                         @foreach($cryptoPortfolio as $key => $portfolio)
                             <tr>
-
                                 <td>
                                     <p class="fw-normal mb-1">{{$loop->index + 1}}</p>
                                 </td>
-
                                 <td>
                                     <p class="fw-normal mb-1">{{ $portfolio->symbol }}</p>
                                 </td>

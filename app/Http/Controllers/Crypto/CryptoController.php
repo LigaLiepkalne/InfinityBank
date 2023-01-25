@@ -68,7 +68,7 @@ class CryptoController extends Controller
 
         $crypto = $this->cryptoCurrencyService->getSingleCrypto($query);
 
-        $metadata = $this->cryptoCurrencyService->getCryptoMetadata($query);
+        $metadata = $this->cryptoCurrencyService->getCryptoMetadata($query)->toArray();
 
         return view('crypto.show', [
             'userBankAccounts' => $userBankAccounts,
@@ -90,7 +90,7 @@ class CryptoController extends Controller
             'userBankAccounts' => $userBankAccounts,
             'crypto' => $crypto,
             'currencies' => self::CURRENCIES,
-            'metadata' => $metadata,
+            'metadata' => $metadata->toArray(),
         ]);
     }
 }

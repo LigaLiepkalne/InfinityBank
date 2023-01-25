@@ -1,11 +1,3 @@
-
-<!-- MDB -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<!-- Close account form-->
 <style>
     form {
         display: flex;
@@ -29,20 +21,18 @@
     .form-group select {
         flex: 1;
     }
+
     h4 {
         justify-content: left;
         font-size: 2.5rem;
         font-weight: 600;
         color: #8f9c9f;
     }
-
 </style>
-@include('userSettings.code-card')
 
 <x-app-layout>
-
     <x-slot name="header">
-        <h4 class="font-semibold"> {{$userBankAccount->number}} {{$userBankAccount->label}}</h4>
+        <h4 class="font-semibold"> {{ $userBankAccount->number }} {{ $userBankAccount->label }}</h4>
         <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button
@@ -98,7 +88,6 @@
                 </button>
             </li>
         </ul>
-
     </x-slot>
 
     <div class="py-6 ">
@@ -108,19 +97,15 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade" id="label" role="tabpanel" aria-labelledby="label-tab">
-
-                            <!-- Label Edit form-->
+                            <!-- Label Edit Form-->
                             <form method="POST" action="/accounts/{{ $userBankAccount->id }}/edit">
                                 @csrf
                                 @method('PUT')
-
                                 <div class="form-group">
-                                    <!-- Type -->
                                     <x-label for="label">New Label <span style="color: red;">*</span></x-label>
                                     <x-input id="label" class="block mt-1 w-5/6" type="text" name="label"
                                              :value="$userBankAccount->label" required autofocus/>
                                 </div>
-
                                 <div class="flex items-center justify-left">
                                     <x-button class="ml-4" style="background-color:#333839; border-radius: 30px">
                                         <b> {{ __('Update') }}</b>
@@ -128,46 +113,38 @@
                                 </div>
                             </form>
                         </div>
-
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
                             <!-- Display errors -->
                             @if (session('success'))
                                 <div class="mx-auto text-center font-medium text-green-600" style="margin-top: 5px">
                                     {{ session('success') }}
                                 </div>
                             @endif
-
                             @if (session('error'))
                                 <div class="mx-auto text-center font-medium text-red-600" style="margin-top: 5px">
                                     {{ session('error') }}
                                 </div>
                             @endif
-
-
+                            <!-- Delete Account Form-->
                             <form method="POST" action="/accounts/{{ $userBankAccount->id }}/delete">
                                 @csrf
                                 @method('DELETE')
-
                                 <div class="form-group">
-                                    <!-- Label -->
                                     <x-label for="password">
                                         Password <span style="color: red;">*</span>
                                     </x-label>
-                                    <x-input id="password" class="block mt-1 w-full" type="text" name="password" required
+                                    <x-input id="password" class="block mt-1 w-full" type="text" name="password"
+                                             required
                                              autofocus/>
                                 </div>
-
-
                                 <div class="form-group">
-                                    <!-- Type -->
                                     <x-label for="code">
                                         Security code No. {{ $codeIndex }}<span style="color: red;">*</span>
                                     </x-label>
-                                    <x-input type="text" id="code" class="block mt-1 w-5/6" name="code" required autofocus/>
+                                    <x-input type="text" id="code" class="block mt-1 w-5/6" name="code" required
+                                             autofocus/>
                                     <input type="hidden" name="code_index" value="{{ $codeIndex }}">
                                 </div>
-
                                 <div class="flex items-center justify-end ">
                                     <x-button class="ml-4" style="background-color: #333839; border-radius: 30px">
                                         <b>{{ __('Close') }}</b>
@@ -175,24 +152,18 @@
                                 </div>
                             </form>
                         </div>
-
-                        <div class="tab-pane fade show active" id="transactions" role="tabpanel" aria-labelledby="transactions-tab">
+                        <div class="tab-pane fade show active" id="transactions" role="tabpanel"
+                             aria-labelledby="transactions-tab">
                             @include('account-transactions.current-month-transactions')
                         </div>
-
-                        <div class="tab-pane fade show" id="crypto-portfolio" role="tabpanel" aria-labelledby="crypto-portfolio-tab">
+                        <div class="tab-pane fade show" id="crypto-portfolio" role="tabpanel"
+                             aria-labelledby="crypto-portfolio-tab">
                             @include('crypto.show-portfolio')
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!-- Include code-card.blade.php-->
     @include('userSettings.code-card')
-
 </x-app-layout>

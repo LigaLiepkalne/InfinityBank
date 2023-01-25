@@ -43,7 +43,7 @@
     </x-slot>
 
     @if (session('success'))
-        <div class="mx-auto text-center font-medium text-green-600" style="margin-top: 5px">
+        <div class="mx-auto text-center font-medium text-green-600" style="margin-top: 15px">
             {{ session('success') }}
         </div>
     @endif
