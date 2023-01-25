@@ -29,7 +29,6 @@ Route::get('/', function () {
 Route::get('/dashboard', [AccountController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::get('accounts/{id}', [AccountController::class, 'show'])->middleware(['auth'])->name('show');
-
 Route::put('accounts/{id}/edit', [AccountOperationsController::class, 'updateLabel'])->middleware(['auth'])->name('update');
 Route::delete('accounts/{id}/delete', [CloseAccountController::class, 'deleteAccount'])->middleware(['auth'])->name('delete');
 
