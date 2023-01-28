@@ -6,7 +6,7 @@
 
 - [GIF vizualizations](#overview)
 - [Full feature list](#features)
-- [Technologies used]($technologies-used)
+- [Technologies used](#technologies-used)
 - [Run project](#run-project)
   * [Database Setup](#database-setup)
   * [API Key Setup](#api-key-setup)
