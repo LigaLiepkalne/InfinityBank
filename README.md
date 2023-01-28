@@ -43,11 +43,11 @@
 
 ## Technologies used
 
-- PHP 7.4.33
-- MySQL 8.0.30
-- Composer 2.4.4
-- Laravel 8.75
-- Node.js and npm 8.19.3
+- [PHP 7.4.33](https://www.php.net/)
+- [MySQL 8.0.30](https://dev.mysql.com/)
+- [Composer 2.4.4](https://getcomposer.org/)
+- [Laravel 8.75](https://laravel.com/)
+- [Node.js and npm 8.19.3](https://nodejs.org/en/)
 
 ## Run project
 
@@ -58,8 +58,8 @@
     - Run `php artisan migrate` to create the necessary tables.
 
    #### API Key Setup
-  - Cryptocurrency data: **[CoinMarketCap](https://coinmarketcap.com/api/)**. Obtain API key and store in **env** file under constant COIN_MARKET_CAP_API_KEY. 
-  - Currency exchange data: **[Currencyapi](https://currencyapi.com/)**. Obtain API key and store in **env** file under constant CURRENCY_EXCHANGE_RATE_API_KEY. 
+  - Cryptocurrency data: [CoinMarketCap](https://coinmarketcap.com/api/). Obtain API key and store in **env** file under constant COIN_MARKET_CAP_API_KEY. 
+  - Currency exchange data: [Currencyapi](https://currencyapi.com/). Obtain API key and store in **env** file under constant CURRENCY_EXCHANGE_RATE_API_KEY. 
 
 - Install project dependencies
     - Run `composer install` to install PHP dependencies.
