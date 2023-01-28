@@ -2,15 +2,14 @@
 
 ### InfinityBank is an iBank project that combines the power of the PHP Laravel framework, API calls, and user data management in MySQL.
 
-<p align="justify">InfinityBank clients can open multiple accounts per profile with support for 20 different currencies. Expierience features such as money transfer between accounts, secure payments with two-step verification, full transaction overview with result filtering, and payment hystory monitoring within current month. Additionally, InfinityBank offers trading in cryptocurrencies and the ability to track the performance of each account's portfolio, including profit and loss.</p>
+<p align="justify">InfinityBank clients can open multiple accounts per profile with support for 20 different currencies. Expierience features such as money transfer between accounts, secure payments with two-step verification, full transaction overview with result filtering, and payment history monitoring within current month. Additionally, InfinityBank offers trading in cryptocurrencies and the ability to track the performance of each account's portfolio, including profit and loss.</p>
 
 - [GIF vizualizations](#overview)
 - [Full feature list](#features)
-- [Prerequisites for local setup]($prerequisites)
-- [Run project](#installation)
+- [Technologies used]($technologies-used)
+- [Run project](#run-project)
   * [Database Setup](#database-setup)
   * [API Key Setup](#api-key-setup)
-- [Technology Stack](#technology-stack)
 
 ## GIF vizualizations
 
@@ -30,7 +29,7 @@
 
 ## Features
 - Multiple accounts per profile
-- 20 currency support
+- Currency exchange
 - Money transfers between accounts
 - Two-step verification
 - Account label editing
@@ -42,5 +41,29 @@
 - Profit/Loss tracking
 - Closing account
 
-## Installation
- 
+## Technologies used
+
+- PHP 7.4.33
+- MySQL 8.0.30
+- Composer 2.4.4
+- Laravel 8.75
+- Node.js and npm 8.19.3
+
+## Run project
+
+- Clone project `git clone https://github.com/LigaLiepkalne/InfinityBank.git`
+
+   #### Database Setup
+    - Connection configuration: copy **env.example** file, remove *example* from file name and set DB_DATABASE, DB_USERNAME, and DB_PASSWORD variables to the appropriate values.
+    - Run `php artisan migrate` to create the necessary tables.
+
+   #### API Key Setup
+  - Cryptocurrency data: **[CoinMarketCap](https://coinmarketcap.com/api/)**. Obtain API key and store in **env** file under constant COIN_MARKET_CAP_API_KEY. 
+  - Currency exchange data: **[Currencyapi](https://currencyapi.com/)**. Obtain API key and store in **env** file under constant CURRENCY_EXCHANGE_RATE_API_KEY. 
+
+- Install project dependencies
+    - Run `composer install` to install PHP dependencies.
+    - Run `npm install` to install JavaScript dependencies.
+    - Run `npm run dev` to build the front-end assets.
+
+- Run `php artisan serve` to start the development server.
