@@ -53,6 +53,11 @@
 
 - Clone project `git clone https://github.com/LigaLiepkalne/InfinityBank.git`
 
+- Install project dependencies
+    - Run `composer install` to install PHP dependencies.
+    - Run `npm install` to install JavaScript dependencies.
+    - Run `npm run dev` to build the front-end assets.
+
    #### Database Setup
     - Connection configuration: copy **env.example** file, remove *example* from file name and set DB_DATABASE, DB_USERNAME, and DB_PASSWORD variables to the appropriate values.
     - Run `php artisan migrate` to create the necessary tables.
@@ -60,10 +65,5 @@
    #### API Key Setup
   - Cryptocurrency data: [CoinMarketCap](https://coinmarketcap.com/api/). Obtain API key and store in **env** file under constant COIN_MARKET_CAP_API_KEY. 
   - Currency exchange data: [Currencyapi](https://currencyapi.com/). Obtain API key and store in **env** file under constant CURRENCY_EXCHANGE_RATE_API_KEY. 
-
-- Install project dependencies
-    - Run `composer install` to install PHP dependencies.
-    - Run `npm install` to install JavaScript dependencies.
-    - Run `npm run dev` to build the front-end assets.
 
 - Run `php artisan serve` to start the development server.
