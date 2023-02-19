@@ -72,7 +72,11 @@ class AccountOperationsController extends Controller
                 $exchangeFrom = $this->currencyApiService->getExchangeRate($fromCurrency);
                 $exchangeTo = $this->currencyApiService->getExchangeRate($toCurrency);
 
-                $amount = $request->get('amount') / $exchangeFrom;
+                if($fromCurrency === 'EUR') {
+                    $amount = $request->get('amount') * $exchangeTo;
+                } else {
+                    $amount = $request->get('amount') / $exchangeFrom;
+                }
 
                 Account::where('number', $request->get('from_account'))->decrement('balance', $request->get('amount'));
                 Account::where('number', $request->get('to_account'))->increment('balance', $amount);
@@ -120,6 +124,7 @@ class AccountOperationsController extends Controller
                 ]);
             });
         } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
         return redirect()->back()->with('success', 'Payment successful');
     }

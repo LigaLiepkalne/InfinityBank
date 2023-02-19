@@ -62,8 +62,7 @@
                                     </td>
                                     <td>
                                         <p class="fw-normal mb-1">{{ $transaction->details }}</p>
-                                        <p class="text-muted mb-0">{{ $transaction->received_amount }}
-                                            , {{ $transaction->sent_currency }}</p>
+                                        <p class="text-muted mb-0">{{ $transaction->received_amount }}, {{ $transaction->received_currency }}</p>
                                         <p class="text-muted mb-0">EXCHANGE
                                             RATE: {{ $transaction->conversion_rate }}</p>
                                     </td>

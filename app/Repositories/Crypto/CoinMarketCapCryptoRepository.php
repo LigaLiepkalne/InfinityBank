@@ -108,32 +108,57 @@ class CoinMarketCapCryptoRepository implements CryptoRepository
     }
 
     //additional crypto highlights for index view
-    public function getAscendingTop(string $currency): Collection
-    {
-        $response = Cache::remember('ascendingList' . $currency, now()->addMinutes(60),
-            function () use ($currency) {
-                return $this->client->get(
-                    "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest", [
-                        'convert' => $currency,
-                        'limit' => 3, 'sort_dir' => 'asc']
-                )->json();
-            });
+    // public function getAscendingTop(string $currency): Collection
+    // {
+    //     $response = Cache::remember('ascendingList' . $currency, now()->addMinutes(60),
+    //         function () use ($currency) {
+    //             return $this->client->get(
+    //                 "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest", [
+    //                     'convert' => $currency,
+    //                     'limit' => 3, 'sort_dir' => 'asc']
+    //             )->json();
+    //         });
 
-        $info = Cache::remember('cryptoInfo', now()->addMinutes(60),
-            function () use ($response) {
-                return $this->client->get(
-                    'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info',
-                    ['symbol' => implode(',', array_column($response['data'], 'symbol'))]
-                )->json();
-            });
-        Cache::flush();
-        $cryptoCollection = new Collection();
-        foreach ($response['data'] as $crypto) {
-            $crypto['logo'] = $info['data'][$crypto['symbol']]['logo'];
-            $cryptoCollection->add($this->buildModel($crypto, $currency));
-        }
-        return $cryptoCollection;
+    //     $info = Cache::remember('cryptoInfo', now()->addMinutes(60),
+    //         function () use ($response) {
+    //             return $this->client->get(
+    //                 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info',
+    //                 ['symbol' => implode(',', array_column($response['data'], 'symbol'))]
+    //             )->json();
+    //         });
+    //     Cache::flush();
+    //     $cryptoCollection = new Collection();
+    //     foreach ($response['data'] as $crypto) {
+    //         $crypto['logo'] = $info['data'][$crypto['symbol']]['logo'];
+    //         //if the crypto has no logo, use the default one
+            
+    //         $cryptoCollection->add($this->buildModel($crypto, $currency));
+    //     }
+    //     return $cryptoCollection;
+    // }
+
+    public function getAscendingTop(string $currency): Collection
+{
+    $response = $this->client->get(
+        "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest", [
+            'convert' => $currency,
+            'limit' => 3, 'sort_dir' => 'asc']
+    )->json();
+
+    $info = $this->client->get(
+        'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info',
+        ['symbol' => implode(',', array_column($response['data'], 'symbol'))]
+    )->json();
+        
+    $cryptoCollection = new Collection();
+    foreach ($response['data'] as $crypto) {
+        $crypto['logo'] = $info['data'][$crypto['symbol']]['logo'];
+        //if the crypto has no logo, use the default one
+            
+        $cryptoCollection->add($this->buildModel($crypto, $currency));
     }
+    return $cryptoCollection;
+}
 
     //additional crypto highlights for index view
     public function getDescendingTop(string $currency): Collection

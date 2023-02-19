@@ -122,12 +122,12 @@
                                         </td>
                                         <td>
                                             <p class="fw-normal mb-1">{{ $transaction->details }}</p>
-                                            <p class="text-muted mb-0">{{ $transaction->received_amount }}, {{ $transaction->sent_currency }}</p>
+                                            <p class="text-muted mb-0">{{ $transaction->received_amount }}, {{ $transaction->received_currency }}</p>
                                             <p class="text-muted mb-0">EXCHANGE
                                                 RATE: {{ $transaction->conversion_rate }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-danger mb-0">{{ $transaction->sent_amount }} {{ $transaction->received_currency }}</p>
+                                            <p class="text-danger mb-0">{{ $transaction->sent_amount }} {{ $transaction->sent_currency }}</p>
                                         </td>
                                     @else
                                         <td>
@@ -142,7 +142,7 @@
                                         </td>
                                         <td>
                                             <p class="text-success mb-0">
-                                                +{{ $transaction->received_amount }} {{ $transaction->sent_currency }}
+                                                +{{ $transaction->received_amount }} {{ $transaction->received_currency }}
                                             </p>
                                         </td>
                                     @endif
